@@ -48,7 +48,7 @@ O agente clona (ou atualiza) o kit em `~/development/harness-canonico`, descobre
 
 ## O fluxo
 
-E0 Definição (Codex, `tech-lead`) → E1 Preparação → E2 Consulta prévia → E3 SPEC → E3b Revisão da SPEC (Codex) → **aprovação da SPEC** → E4 Plano → **aprovação do plano** → E5 Wave → E6 Revisão interna → E7 Navegador → E8 Gates → E9 Commit → E10 Revisão final (Codex) → E11 Memória → E12 Merge (você) → E13 Deploy (OpenCode prepara, você executa). Mudança pequena pode seguir o caminho curto C1. Detalhe em `.agents/fluxo.md`.
+E0 Entrada da demanda (você, em conversa separada com Superpowers, ou o Codex `tech-lead`; o `tech-lead` recebe) → E1 Preparação → E2 Consulta prévia → E3 SPEC → E3b Revisão da SPEC (Codex) → **aprovação da SPEC** → E4 Plano → **aprovação do plano** → E5 Wave → E6 Revisão interna → E7 Navegador → E8 Gates → E9 Commit → E10 Revisão final (Codex) → E11 Memória → E12 Merge (você) → E13 Deploy (OpenCode prepara, você executa). Mudança pequena pode seguir o caminho curto C1. Detalhe em `.agents/fluxo.md`; o que cada etapa precisa gerar está em `.agents/entregas.md`.
 
 As duas aprovações são frases exatas, só suas: `Aprovo a SPEC.` e `Aprovo o plano.`
 
@@ -57,7 +57,7 @@ As duas aprovações são frases exatas, só suas: `Aprovo a SPEC.` e `Aprovo o 
 | Terminal | CLI | Faz |
 |---|---|---|
 | Orquestrador | Claude Code | E1 a E9 e E11; despacha as personas |
-| Revisor | Codex | E0 (conduz a definição), E3b e E10 |
+| Revisor | Codex | E0 (recebe a definição, ou a conduz), E3b e E10 |
 | Pesquisa | Antigravity | Pesquisa e apoio geral |
 | Infra | OpenCode | E13: roteiro de deploy |
 

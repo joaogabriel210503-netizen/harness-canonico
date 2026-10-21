@@ -76,6 +76,8 @@ Esperado: o caminho termina no nome da sua pasta e **não** contém `.maestri`; 
 
 ## Passo 5: contar a ideia ao tech-lead, no Codex (etapa E0)
 
+**Atalho:** se você já fez a definição numa conversa separada (Passo 0 de `04-rotina-de-uma-demanda.md`), copie o arquivo para `docs/definicao/definicao.md` e use o prompt de **receber** do Passo 1 do `04`; o 5b abaixo é para quando você ainda não tem definição.
+
 **Por que no Codex e não no Claude Code:** o Claude Code é quem orquestra, implementa e commita. A definição do que construir sai melhor de um agente de outra família de modelo, que não vai depois defender o código que o Claude escreveu. O Codex lê o `AGENTS.md` sozinho.
 
 **5a. Crie o terminal do Codex** no mesmo workspace: ferramenta **Terminal**, arrastar, escolha **Codex**, nome **Tech lead**, **sem responsabilidade (role)**. Se ele pedir login, é o da sua assinatura do ChatGPT (só você faz). Se perguntar se confia na pasta, responda que sim.

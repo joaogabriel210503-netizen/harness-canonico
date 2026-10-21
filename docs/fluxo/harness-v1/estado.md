@@ -53,3 +53,7 @@ Um revisor independente leu os guias como o Gabriel e como um agente, sem ver a 
 - Máquina nova: PATH do `~/.local/bin`, caminhos absolutos, Context7 como passo do Gabriel, plugins de terceiros dependem da exportação (Parte A).
 - O orquestrador pede liberação para gravar `.agents/stack.md` na E4 (arquivo de regra; a trava não foi afrouxada).
 - Sessão aberta dentro do kit: `.claude/CLAUDE.md` na raiz do kit avisa que o `AGENTS.md` é modelo (não vai para os projetos).
+
+## Entrada da demanda em conversa separada (2026-10-21)
+
+Decisão do Gabriel: a definição (PRD, regras de negócio, contexto do projeto e MVP, em um documento ou quatro) pode nascer numa conversa separada com Superpowers, antes ou fora do harness. O `tech-lead` (Codex) passa a **receber e conferir**; conduzir do zero fica como segunda forma. Criado `.agents/entregas.md` (o que cada parte do fluxo gera). Guia `04` ganhou o Passo 0; `02` aponta para ele. Selftest e manifesto verdes (134 arquivos).

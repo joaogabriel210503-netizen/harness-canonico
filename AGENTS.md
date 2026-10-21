@@ -68,7 +68,7 @@ Despache a persona cuja frase combina com a tarefa. Nunca um agente genérico. O
 
 | Persona | Quando usar | Edita código |
 |---|---|---|
-| `tech-lead` | Demanda nova ou vaga (E0): conduz a definição com o humano, uma pergunta por vez, e escreve o pedido. Não escreve a SPEC | Não |
+| `tech-lead` | Demanda nova ou vaga (E0): recebe a definição feita em conversa separada (ou a conduz, uma pergunta por vez), confere e escreve o pedido. Não escreve a SPEC | Não |
 | `orquestrador` | Sessão principal: consulta, SPEC, plano, despacho, gates e commit | Não |
 | `backend-specialist` | Endpoint, lógica de servidor, integração, persistência | Sim |
 | `frontend-specialist` | Componente, tela, layout, estado de interface | Sim |
@@ -107,6 +107,7 @@ O dono do padrão autoriza o orquestrador a escolher o nível de modelo em cada 
 | Caminho | O que é |
 |---|---|
 | `.agents/fluxo.md` | As etapas E0 a E13, quem faz e o que libera a próxima |
+| `.agents/entregas.md` | O que cada etapa precisa gerar: documento, modelo, local e critério de pronto |
 | `.agents/stack.md` | Stack e comandos canônicos deste projeto |
 | `.agents/personas/` | Uma persona por arquivo |
 | `.agents/rules/` | Consulta, ondas, reparo, gates, commit, memória, formatos de saída |

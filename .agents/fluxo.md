@@ -2,11 +2,11 @@
 
 Toda demanda percorre as etapas abaixo, nesta ordem. O estado de cada demanda fica em `docs/fluxo/<demanda>/estado.md` e é a única fonte sobre "onde estamos". Leia antes de agir; atualize ao terminar uma etapa.
 
-Uma etapa só começa quando a coluna **Só começa quando** é verdadeira. Se não for, pare e diga ao humano o que falta. Toda resposta de agente começa pela linha F1 e os relatos seguem os formatos de `rules/formatos.md`.
+Uma etapa só começa quando a coluna **Só começa quando** é verdadeira. Se não for, pare e diga ao humano o que falta. O que cada etapa precisa gerar, com o modelo e o critério de pronto, está em `entregas.md`. Toda resposta de agente começa pela linha F1 e os relatos seguem os formatos de `rules/formatos.md`.
 
 | Etapa | Quem | Só começa quando | O que acontece | O que fica gravado |
 |---|---|---|---|---|
-| **E0 Definição** | `tech-lead` (Codex) com o humano | O humano trouxe uma demanda, em qualquer linguagem | Uma pergunta por vez até fechar PRD, regras de negócio, contexto e MVP. Conduz a definição; **não escreve a SPEC** | `docs/definicao/`, `estado.md`, `handoff/pedido.md` |
+| **E0 Definição** (entrada da demanda) | O humano, numa conversa separada com Superpowers (antes ou fora do harness), ou o `tech-lead` (Codex). O `tech-lead` **recebe e confere** nos dois casos | O humano trouxe uma demanda, em qualquer linguagem | Define PRD, regras de negócio, contexto e MVP (um documento ou quatro), uma pergunta por vez. O `tech-lead` confere contra o checklist, completa o que faltar e abre a demanda. **Não escreve a SPEC** | `docs/definicao/`, `estado.md`, `handoff/pedido.md` |
 | **E1 Preparação** | `orquestrador` | Existe `handoff/pedido.md` | Confere o git, cria `demanda/<slug>` e confere o que agente externo deixou (`git status --short`) | Branch criada |
 | **E2 Consulta prévia** | `orquestrador` | E1 feita | Vault (MCP), grafo, documentos, estrutura, Context7. Ver `rules/consulta.md` | Seção "Consultas feitas" |
 | **E3 SPEC** | `orquestrador` | E2 feita | Superpowers `brainstorming`; critérios de aceite; declara se a demanda é C1 | `docs/superpowers/specs/AAAA-MM-DD-<slug>.md`, com hash |

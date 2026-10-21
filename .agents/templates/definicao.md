@@ -1,6 +1,6 @@
 # Definição: [nome da demanda]
 
-> Conduzida pelo Codex (persona `tech-lead`) com o humano, em E0: uma pergunta por vez. O `tech-lead` registra a definição, mas **não escreve a SPEC**: ela é só do orquestrador (E3, DP-21). Pode ser um documento só, como este, ou quatro arquivos em `docs/definicao/`.
+> Feita em E0: ou pelo humano numa conversa separada com a skill `brainstorming` do Superpowers (antes ou fora do harness, uma pergunta por vez), ou conduzida pelo Codex (persona `tech-lead`). Em qualquer caso o `tech-lead` recebe e confere. Quem registra a definição **não escreve a SPEC**: ela é só do orquestrador (E3, DP-21). Pode ser um documento só, como este, ou quatro arquivos em `docs/definicao/` (`prd.md`, `regras-de-negocio.md`, `contexto.md`, `mvp.md`).
 > **Pedido pequeno (C1):** não precisa de definição longa. O pedido pode ser o próprio texto do Gabriel em `docs/fluxo/<demanda>/handoff/pedido.md`, e o orquestrador declara o C1 na SPEC (critério em `modelo-spec.md`).
 > Linguagem simples: precisa servir à gestão e ao desenvolvimento.
 

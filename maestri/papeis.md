@@ -7,7 +7,7 @@ Regra de abertura (DP-28): cada terminal abre **na raiz do projeto**. Sessão ab
 | Terminal (nome) | CLI | Papel | Comando de abertura (na raiz) | Lê primeiro | Formato de saída |
 |---|---|---|---|---|---|
 | Orquestrador | Claude Code | Orquestra E1 a E13, implementa por subagentes, commita | `claude` | `AGENTS.md`, `.agents/personas/orquestrador.md`, `estado.md` | F1 em toda resposta; F10 ao fechar etapa |
-| Revisor | Codex | Tech lead (E0), revisão da SPEC (E3b), revisão final (E10) | `codex` | `AGENTS.md`, `.agents/personas/tech-lead.md`, `estado.md` | F1; F9 (achados em F4) |
+| Revisor | Codex | Tech lead (E0: recebe ou conduz a definição), revisão da SPEC (E3b), revisão final (E10) | `codex` | `AGENTS.md`, `.agents/personas/tech-lead.md`, `estado.md` | F1; F9 (achados em F4) |
 | Pesquisa | Antigravity | Pesquisa e apoio geral. **Não é revisor** | abrir o projeto na raiz no Antigravity | `AGENTS.md`, a ordem | F1; F9 com fontes |
 | Infra | OpenCode | Infraestrutura e roteiro de deploy (E13) | `opencode` | `AGENTS.md`, `.agents/personas/devops-engineer.md`, a ordem | F1; F9 |
 

@@ -5,7 +5,7 @@ Use este roteiro toda vez que começar algo novo num projeto que já tem o harne
 ## Os quatro terminais (um por papel, nunca misture)
 
 1. **Orquestrador** (Claude Code): conduz quase tudo e é o **único que commita**.
-2. **Revisor** (Codex): conduz a definição com você (E0, como `tech-lead`), revisa a SPEC (E3b) e faz a revisão final (E10). Depois do pedido ele é também o seu **consultor**: cole nele qualquer mensagem que você não entendeu. Não escreve código nem a SPEC.
+2. **Revisor** (Codex): recebe a definição que você fez (ou a conduz com você, E0, como `tech-lead`), revisa a SPEC (E3b) e faz a revisão final (E10). Depois do pedido ele é também o seu **consultor**: cole nele qualquer mensagem que você não entendeu. Não escreve código nem a SPEC.
 3. **Pesquisa** (Antigravity): só entra quando um prompt daqui mandar, para pesquisa externa e apoio geral.
 4. **Infra** (OpenCode): prepara o roteiro de deploy (E13). Nunca executa o deploy.
 
@@ -19,9 +19,37 @@ Regra de ouro: **todo prompt começa dizendo o papel** ("Você é o tech-lead", 
 
 No C1 você pula o Passo 1 (o pedido é o seu próprio texto) e o Passo 3 (o Codex não revisa a SPEC). As duas frases de aprovação, os gates e a revisão final do Codex continuam. O orquestrador lista, no pedido de aprovação, cada item do critério que ele conferiu; se algum item for "não", ele avisa que não é C1.
 
-## Passo 1: definir a demanda (terminal Revisor, Codex como tech-lead)
+## Passo 0: definir a demanda numa conversa separada (recomendado, antes ou fora do harness)
 
-Troque o trecho entre colchetes e os `<nome-da-demanda>`:
+A definição é o que alimenta todo o fluxo: PRD, regras de negócio, contexto do projeto (de onde vem, se já houve outro projeto e como foi) e MVP. Pode ser **um documento só** ou quatro. Ela pode ser feita antes de o projeto ter o harness, numa conversa à parte.
+
+Abra o Claude Code em qualquer pasta (pode ser uma pasta de rascunho, como `~/development/definicoes`), sem o harness, com o plugin Superpowers ligado. Cole, trocando o trecho entre colchetes:
+
+```text
+Use a skill brainstorming do Superpowers. Você vai conduzir a DEFINIÇÃO de uma demanda comigo: não programe e não decida tecnologia, biblioteca nem arquitetura.
+Leia ~/development/harness-canonico/.agents/templates/definicao.md e siga essa estrutura: PRD, regras de negócio, contexto do projeto e MVP.
+Uma pergunta por mensagem, até não restar ambiguidade. Pergunte também: de onde vem a demanda, se já houve outro projeto parecido e como foi, quem usa, e o que NÃO precisa ter. Havendo mais de uma interpretação razoável, mostre todas com vantagem e custo; não escolha calado.
+As regras de negócio têm de ser testáveis: cada uma com um exemplo que cumpre e um que viola. O MVP tem de dizer o que fica de fora.
+No fim, grave tudo em ./definicao.md (um documento só) e me diga o caminho. Não crie código nem outro arquivo.
+Demanda: [conte o que é, quem usa, o que faz e o que NÃO precisa ter].
+```
+
+Responda uma pergunta por vez. Se for técnica e você não souber: "decida o mais simples que funcione".
+
+Quando o `definicao.md` estiver pronto, copie-o para o projeto como `docs/definicao/definicao.md` (crie a pasta se não existir). Se o projeto ainda não existe, guarde o arquivo e copie depois do `02-projeto-novo.md`. Pronto, vá ao Passo 1.
+
+## Passo 1: o tech-lead recebe a definição (terminal Revisor, Codex)
+
+**Se você fez o Passo 0**, o Codex só recebe e confere. Troque o `<nome-da-demanda>`:
+
+```text
+Leia AGENTS.md e .agents/personas/tech-lead.md. Você é o tech-lead e vai RECEBER uma definição que já existe em docs/definicao/.
+Regras desta sessão, porque você roda sem as travas do harness: escreva somente em docs/definicao/ e em docs/fluxo/<nome-da-demanda>/; o pedido vai EXATAMENTE em docs/fluxo/<nome-da-demanda>/handoff/pedido.md (não crie pasta handoff/ na raiz do projeto); não crie nem edite código, configuração ou qualquer outro arquivo; não escreva a SPEC; não use git add, git commit nem git checkout; não instale pacote.
+Confira a definição contra o checklist do tech-lead: PRD, regras de negócio testáveis, contexto do projeto, MVP com o que fica fora, nenhuma decisão de stack. Pergunte só o que faltar, uma pergunta por mensagem; não refaça o que está bom. Se existir a pasta design-system/ na raiz, cite-a no contexto como requisito fixo e somente leitura.
+Depois crie docs/fluxo/<nome-da-demanda>/estado.md e o pedido (caminho da definição, resumo de até 5 linhas, perguntas em aberto). Me diga o caminho exato do pedido e pare.
+```
+
+**Se você não tem definição**, o Codex a conduz do zero. Troque o trecho entre colchetes e os `<nome-da-demanda>`:
 
 ```text
 Leia AGENTS.md e .agents/personas/tech-lead.md. Você é o tech-lead.

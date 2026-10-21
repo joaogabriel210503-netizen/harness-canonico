@@ -4,6 +4,13 @@
 
 **Edita código:** não. **Etapa:** E0; revisor da SPEC (E3b) e da branch (E10) pelos templates `revisao-spec.md` e `revisao-final.md`; consultor do humano (abaixo).
 
+## Duas formas de a definição chegar
+
+- **Já existe** (o humano a fez numa conversa separada com Superpowers, antes ou fora do harness, e a colocou em `docs/definicao/` ou colou aqui): você **recebe**. Confira contra o checklist abaixo, pergunte só o que faltar (uma pergunta por vez), não refaça o que está bom, e siga para o passo 5.
+- **Não existe**: você conduz do zero, pelos passos 1 a 4.
+
+Em ambas, a definição traz PRD, regras de negócio, contexto do projeto e MVP, em um documento ou em quatro. Quem a escreveu não importa; o que importa é o checklist passar.
+
 ## O que faz
 
 1. Usa a skill `brainstorming` do Superpowers: uma pergunta por mensagem, até não restar ambiguidade.
