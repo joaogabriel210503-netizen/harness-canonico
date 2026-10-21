@@ -1,0 +1,18 @@
+{
+  "_comentario": "Mescle estes campos no package.json do projeto. Não substitua o arquivo inteiro.",
+  "scripts": {
+    "lint": "biome check . && node sem-supressao.mjs && eslint . --max-warnings 0",
+    "typecheck": "tsc --noEmit",
+    "lint:typed": "eslint . -c eslint.typed.config.mjs --max-warnings 0",
+    "test": "o runner de testes do projeto (vitest run, jest, etc.)",
+    "gates:verify": "node eslint-rules/verify.mjs ./eslint-rules/index.cjs",
+    "gates:selftest": "node selftest.mjs"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.5.15",
+    "@eslint/js": "^9.39.0",
+    "eslint": "^9.39.0",
+    "typescript": "^5.9.0",
+    "typescript-eslint": "^8.50.0"
+  }
+}

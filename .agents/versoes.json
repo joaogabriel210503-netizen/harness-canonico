@@ -1,0 +1,25 @@
+{
+  "_comentario": "Versões das CLIs com que o harness foi testado. O doctor avisa quando a instalada difere. 'minima' reprova.",
+  "claude_code": {
+    "minima": "2.1.295",
+    "testada": "2.1.304"
+  },
+  "codex": {
+    "testada": "0.163.0",
+    "provado": "configuração, execpolicy e guarda; matcher .* e normalizar cobrem o exec modo código; não provado com modelo (hook-trust)"
+  },
+  "opencode": {
+    "testada": "2.0.22",
+    "provado": "configuração e plugin reescrito para a API v2 (export default id+setup); plugin não rodado com modelo"
+  },
+  "antigravity": {
+    "testada": null,
+    "provado": "nada: sem hooks; vale a regra escrita"
+  },
+  "biome": {
+    "testada": "2.5.15"
+  },
+  "gitleaks": {
+    "testada": null
+  }
+}

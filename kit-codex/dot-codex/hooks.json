@@ -1,0 +1,16 @@
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": ".*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"$(git rev-parse --show-toplevel)/.claude/hooks/guarda-externa.mjs\" codex tech-lead",
+            "timeout": 30
+          }
+        ]
+      }
+    ]
+  }
+}

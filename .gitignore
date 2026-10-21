@@ -1,0 +1,15 @@
+.claude/liberar-regras
+.claude/settings.local.json
+.claude/worktrees/
+.claude/scheduled_tasks.lock
+.claude/settings.json.graphify-bak
+node_modules/
+.DS_Store
+.env
+.env.*
+!.env.example
+*.pem
+*.log
+.auditoria-tmp/
+# Saída gerada do Graphify (DP-08): cada máquina regenera com `graphify update .`
+graphify-out/

@@ -1,0 +1,34 @@
+#!/bin/sh
+# Pre-push do harness. O push é do humano, então o custo dos gates pesados cai na
+# hora certa. Falha FECHADA. Em cada pasta com package.json roda, nesta ordem:
+#   gates:selftest (prova que o gate reprova o que deve), typecheck, test, lint:typed.
+# Script que não existe reprova: não finja que rodou (.agents/rules/gates.md).
+
+raiz=$(git rev-parse --show-toplevel) || exit 1
+cd "$raiz" || exit 1
+
+if ! command -v node >/dev/null 2>&1; then
+  echo "pre-push: node não encontrado no PATH; o push foi barrado." >&2
+  exit 1
+fi
+
+node .githooks/verificar-gates.mjs || exit 1
+pastas=$(node .githooks/verificar-gates.mjs --listar) || exit 1
+
+while IFS= read -r pasta; do
+  [ -z "$pasta" ] && continue
+  for script in gates:selftest typecheck test lint:typed; do
+    if ! (cd "$pasta" && grep -q "\"$script\"[[:space:]]*:" package.json); then
+      echo "pre-push: '$pasta/package.json' não tem o script \"$script\". Crie-o antes de dar push (.agents/rules/gates.md)." >&2
+      exit 1
+    fi
+    echo "pre-push: $pasta -> npm run $script" >&2
+    if ! (cd "$pasta" && npm run "$script" --silent); then
+      echo "pre-push: npm run $script reprovou em '$pasta'. Não dê push." >&2
+      exit 1
+    fi
+  done
+done <<EOF
+$pastas
+EOF
+exit 0

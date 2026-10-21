@@ -1,0 +1,29 @@
+{
+  "mcpServers": {
+    "harness-vault": {
+      "type": "stdio",
+      "command": "uvx",
+      "args": [
+        "--from",
+        "git+https://github.com/Swapo-Finance/obsidian-mcp@6e2916ea393f27c37b911649601139bd4c4426ba",
+        "obsidian-mcp"
+      ],
+      "env": {
+        "OBSIDIAN_VAULT_PATH": "./vault",
+        "OBSIDIAN_FOLDER_TEMPLATES": "[{\"folder\":\"01-projetos\",\"template\":\"templates/entrega.md\"},{\"folder\":\"03-conhecimento\",\"template\":\"templates/conhecimento.md\"},{\"folder\":\"daily\",\"template\":\"templates/daily.md\"}]",
+        "OBSIDIAN_SLUG_STYLE": "kebab",
+        "OBSIDIAN_TAG_STYLE": "kebab",
+        "OBSIDIAN_WIKILINK_POLICY": "strict",
+        "OBSIDIAN_NOTE_SIZE_POLICY": "strict",
+        "OBSIDIAN_MAX_NOTE_LINES": "300",
+        "OBSIDIAN_DAILY_DIR": "daily",
+        "OBSIDIAN_REQUIRE_FRONTMATTER": "true"
+      }
+    },
+    "chrome-devtools": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "chrome-devtools-mcp@1.10.1"]
+    }
+  }
+}

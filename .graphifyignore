@@ -1,0 +1,12 @@
+# O grafo é do código do produto. Fora dele: o próprio harness e as pastas geradas.
+.agents/
+.claude/
+.githooks/
+.maestri/
+vault/
+eslint-rules/
+selftest.mjs
+graphify-out/
+node_modules/
+AGENTS.md
+CLAUDE.md

@@ -1,0 +1,32 @@
+# Regras de execução do Codex (execpolicy). Complementam o hook: valem mesmo se o hook não carregar.
+# Teste: codex execpolicy check --rules .codex/rules/harness.rules -- git push
+prefix_rule(
+    pattern = ["git", "push"],
+    decision = "forbidden",
+    justification = "Só o humano faz push (AGENTS.md).",
+    match = [["git", "push"], ["git", "push", "origin", "main"]],
+    not_match = [["git", "status"]],
+)
+prefix_rule(
+    pattern = ["git", "commit"],
+    decision = "forbidden",
+    justification = "Só o orquestrador (Claude Code) commita.",
+    match = [["git", "commit", "-m", "x"]],
+)
+prefix_rule(
+    pattern = ["git", "add"],
+    decision = "forbidden",
+    justification = "Só o orquestrador (Claude Code) prepara commit.",
+    match = [["git", "add", "."]],
+)
+prefix_rule(
+    pattern = ["git", ["reset", "checkout", "restore", "stash", "clean", "rebase", "merge"]],
+    decision = "forbidden",
+    justification = "Comando do git que muda a árvore de trabalho é do orquestrador.",
+    match = [["git", "reset", "--hard"], ["git", "checkout", "main"]],
+)
+prefix_rule(
+    pattern = ["rm", "-rf"],
+    decision = "prompt",
+    justification = "Apagar em massa: confirme com o humano.",
+)

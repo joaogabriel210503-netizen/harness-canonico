@@ -1,0 +1,51 @@
+{
+  // Biome do harness: conjunto CURADO, sem sobreposição com o ESLint
+  // (docs/tools/06 do vibe-coding-toolkit, DP-09). Não ligamos o preset
+  // "recommended" (no Biome 2.5 o equivalente de `recommended: false` é `preset: "none"`; o campo antigo está depreciado). Cada regra entra uma a uma, com o motivo ao lado.
+  // O que o ESLint já cobre NÃO se repete aqui: no-unused-vars, no-explicit-any,
+  // ban-ts-comment, no-var, prefer-const, console, complexidade, teto de linhas.
+  // Mudar este arquivo é mudança de regra: só o humano (rules-guard + gates.lock).
+  // Comentário `biome-ignore` é proibido: o script sem-supressao.mjs reprova.
+  "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
+  "root": true,
+  "vcs": { "enabled": false },
+  "files": {
+    // O Biome só olha o código do produto e os testes. Mantenha igual a
+    // SOURCE_DIRS do eslint.config.mjs (mais pastas de teste na raiz).
+    // eslint-rules/ é cópia sem alteração do toolkit: não reformatar.
+    "includes": ["src/**", "tests/**", "test/**", "e2e/**", "!src/generated/**"]
+  },
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "preset": "none",
+      "suspicious": {
+        // O ESLint do harness não liga eqeqeq: `==` converte tipo sem avisar.
+        "noDoubleEquals": "error",
+        // `.only` e `.skip` esquecidos fazem o teste verde sem testar tudo.
+        // O rules-guard barra o texto no Claude Code; aqui vira gate de git,
+        // para qualquer CLI.
+        "noFocusedTests": "error",
+        "noSkippedTests": "error"
+      },
+      "security": {
+        // eval executa texto como código. O ESLint do harness não liga no-eval.
+        "noGlobalEval": "error",
+        // HTML cru no React abre XSS.
+        "noDangerouslySetInnerHtml": "error"
+      },
+      "a11y": {
+        // Acessibilidade básica de tela, que o ESLint do harness não cobre:
+        "useAltText": "error",
+        "useButtonType": "error",
+        "useValidAnchor": "error"
+      }
+    }
+  },
+  // Formatador LIGADO: projeto novo nasce formatado, sem muro de diffs.
+  // Em projeto LEGADO grande que nunca teve formatador, troque por
+  // "enabled": false e escreva aqui o motivo (docs/tools/06, "The formatter,
+  // deliberately disabled"). Sem o motivo escrito, o revisor reprova.
+  "formatter": { "enabled": true, "indentStyle": "space", "lineWidth": 120 },
+  "assist": { "enabled": false }
+}

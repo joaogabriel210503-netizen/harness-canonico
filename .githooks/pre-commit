@@ -1,0 +1,51 @@
+#!/bin/sh
+# Pre-commit do harness. Vale para qualquer CLI, porque é do git. Instalado por
+# .githooks/instalar.sh. Nunca use --no-verify (.agents/rules/commit.md).
+# Falha FECHADA: o que não der para conferir reprova o commit.
+#   1. commit direto em main/master não (o humano libera com HARNESS_COMMIT_MAIN=1);
+#   2. gates.lock confere (ninguém esvaziou o lint, o tsconfig, o selftest...);
+#   3. varredura de segredo no que está no stage (+ gitleaks, se instalado);
+#   4. `npm run lint` em cada pasta com package.json (backend/ e frontend/ contam).
+
+raiz=$(git rev-parse --show-toplevel) || exit 1
+cd "$raiz" || exit 1
+
+ramo=$(git symbolic-ref --short -q HEAD || true)
+case "$ramo" in
+  main|master)
+    if [ "$HARNESS_COMMIT_MAIN" != "1" ]; then
+      echo "pre-commit: commit direto em $ramo não. Trabalhe na branch da demanda (demanda/<slug>); só o humano commita aqui (HARNESS_COMMIT_MAIN=1 git commit ...)." >&2
+      exit 1
+    fi
+    ;;
+esac
+
+if ! command -v node >/dev/null 2>&1; then
+  echo "pre-commit: node não encontrado no PATH. Sem ele os gates não rodam; o commit foi barrado." >&2
+  exit 1
+fi
+
+node .githooks/verificar-gates.mjs || exit 1
+node .githooks/secret-scan.mjs --staged || {
+  echo "pre-commit: segredo no commit. Tire o valor, use variável de ambiente." >&2
+  exit 1
+}
+if command -v gitleaks >/dev/null 2>&1; then
+  gitleaks protect --staged --no-banner >/dev/null 2>&1 || {
+    echo "pre-commit: o gitleaks achou segredo no commit (gitleaks protect --staged)." >&2
+    exit 1
+  }
+fi
+
+pastas=$(node .githooks/verificar-gates.mjs --listar) || exit 1
+while IFS= read -r pasta; do
+  [ -z "$pasta" ] && continue
+  if ! (cd "$pasta" && npm run lint --silent); then
+    echo "" >&2
+    echo "pre-commit: npm run lint reprovou em '$pasta'. A wave não estava pronta; volte para E8. Não use --no-verify." >&2
+    exit 1
+  fi
+done <<EOF
+$pastas
+EOF
+exit 0
